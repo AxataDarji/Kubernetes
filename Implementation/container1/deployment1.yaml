@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: container1-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: container1
+  template:
+    metadata:
+      labels:
+        app: container1
+    spec:
+      containers:
+      - name: container1
+        image: us-central1-docker.pkg.dev/kubernetes-428712/implementation-repository/container1:latest
+        ports:
+        - containerPort: 3000
+        volumeMounts:
+        - mountPath: /home/axatahalifax/data
+          name: persistent-storage
+      volumes:
+      - name: persistent-storage
+        persistentVolumeClaim:
+          claimName: my-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: container1-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 3000
+  selector:
+    app: container1
