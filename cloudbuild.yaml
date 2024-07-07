@@ -22,6 +22,6 @@ steps:
 images:
   - 'gcr.io/kubernetes-428712/us-central1-docker.pkg.dev/kubernetes-428712/implementation-repository/container1:latest'
   - 'gcr.io/kubernetes-428712/us-central1-docker.pkg.dev/kubernetes-428712/implementation-repository/container2:latest'
-
+#Adding Logging
 options:
   logging: CLOUD_LOGGING_ONLY
