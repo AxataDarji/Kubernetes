@@ -19,6 +19,29 @@ steps:
     env:
       - 'DOCKER_BUILDKIT=1'
 
+      # Deploy to GKE
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args: [ 'apply', '-f', 'containerOneDeployment.yaml' ]  # Deploy the image to GKE Cluster
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=us-central1'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=k8s-gke-cluster'
+      - 'CLOUDSDK_CORE_PROJECT=kubernetes-assignment-73'
+ # Deploy to GKE
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args: [ 'apply', '-f', 'deployment1.yaml' ]  # Deploy the image to GKE Cluster
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=us-central1'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=k8s-gke-cluster'
+      - 'CLOUDSDK_CORE_PROJECT=kubernetes-428712'
+
+    # Deploy to GKE
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args: [ 'apply', '-f', 'deployment2.yaml' ]  # Deploy the image to GKE Cluster
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=us-central1'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=k8s-gke-cluster'
+      - 'CLOUDSDK_CORE_PROJECT=kubernetes-428712'
+
 images:
   - 'gcr.io/kubernetes-428712/us-central1-docker.pkg.dev/kubernetes-428712/implementation-repository/container1:v1.13'
   - 'gcr.io/kubernetes-428712/us-central1-docker.pkg.dev/kubernetes-428712/implementation-repository/container2:latest'
