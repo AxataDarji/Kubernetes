@@ -40,7 +40,4 @@ images:
   - 'gcr.io/kubernetes-428712/us-central1-docker.pkg.dev/kubernetes-428712/implementation-repository/container2:latest'
 
 options:
-  logging: # Ensure that Cloud Logging is enabled
-    - 'CLOUD_LOGGING_ONLY'  # Or 'NONE' if you do not need logging
-  env:
-    - 'logsBucket=k8logsbucket'
+  logging: CLOUD_LOGGING_ONLY
