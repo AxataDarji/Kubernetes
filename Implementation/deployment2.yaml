@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: container2-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: container2
+  template:
+    metadata:
+      labels:
+        app: container2
+    spec:
+      containers:
+      - name: container2
+        image: us-central1-docker.pkg.dev/kubernetes-428712/implementation-repository/container2:latest
+        ports:
+        - containerPort: 3001
+        volumeMounts:
+        - mountPath: /home/axatahalifax/data
+          name: persistent-storage
+      volumes:
+      - name: persistent-storage
+        persistentVolumeClaim:
+          claimName: host-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: container2-service
+spec:
+  ports:
+    - protocol: TCP
+      port: 3001
+      targetPort: 3001
+  selector:
+    app: container2
