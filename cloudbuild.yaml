@@ -19,7 +19,7 @@ steps:
     env:
       - 'DOCKER_BUILDKIT=1'
 
-  # Deploy to GKE
+  # Deploy Container 1 to GKE
   - name: 'gcr.io/cloud-builders/kubectl'
     args: [ 'apply', '-f', 'deployment1.yaml' ]  # Deploy the image of contaner1 to GKE Cluster
     env:
@@ -27,7 +27,7 @@ steps:
       - 'CLOUDSDK_CONTAINER_CLUSTER=k8s-gke-cluster'
       - 'CLOUDSDK_CORE_PROJECT=kubernetes-428712'
 
-    # Deploy to GKE
+    # Deploy Container 2 to GKE
   - name: 'gcr.io/cloud-builders/kubectl'
     args: [ 'apply', '-f', 'deployment2.yaml' ]  # Deploy the image of container2 to GKE Cluster
     env:
