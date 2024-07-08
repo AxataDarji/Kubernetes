@@ -10,7 +10,7 @@ spec:
     - ReadWriteOnce
   storageClassName: standard
   gcePersistentDisk:
-    pdName: implementation-disk
+    pdName: implementation-disk-k8
     fsType: ext4
 ---
 # PVC for the containers
