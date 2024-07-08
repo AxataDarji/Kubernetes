@@ -1,11 +1,11 @@
 steps:
   # Build the first Docker image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/kubernetes-428712/us-central1-docker.pkg.dev/kubernetes-428712/implementation-repository/container1:latest', 'Implementation/container1']
+    args: ['build', '-t', 'gcr.io/kubernetes-428712/us-central1-docker.pkg.dev/kubernetes-428712/implementation-repository/container1:v1.13']
 
   # Push the first Docker image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/kubernetes-428712/us-central1-docker.pkg.dev/kubernetes-428712/implementation-repository/container1:latest']
+    args: ['push', 'gcr.io/kubernetes-428712/us-central1-docker.pkg.dev/kubernetes-428712/implementation-repository/container1:v1.13']
     env:
       - 'DOCKER_BUILDKIT=1'
 
@@ -20,7 +20,7 @@ steps:
       - 'DOCKER_BUILDKIT=1'
 
 images:
-  - 'gcr.io/kubernetes-428712/us-central1-docker.pkg.dev/kubernetes-428712/implementation-repository/container1:latest'
+  - 'gcr.io/kubernetes-428712/us-central1-docker.pkg.dev/kubernetes-428712/implementation-repository/container1:v1.13'
   - 'gcr.io/kubernetes-428712/us-central1-docker.pkg.dev/kubernetes-428712/implementation-repository/container2:latest'
 
 options:

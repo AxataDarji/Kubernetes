@@ -23,7 +23,7 @@ spec:
       volumes:
       - name: persistent-storage
         persistentVolumeClaim:
-          claimName: my-pvc
+          claimName: host-pvc
 ---
 apiVersion: v1
 kind: Service
@@ -31,7 +31,8 @@ metadata:
   name: container2-service
 spec:
   ports:
-    - port: 3001
+    - protocol: TCP
+      port: 3001
       targetPort: 3001
   selector:
     app: container2

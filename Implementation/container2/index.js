@@ -4,7 +4,7 @@ const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-const PERSISTENT_DIR = '/yourname_PV_dir'; // Replace with your name
+const PERSISTENT_DIR = '/home/axatahalifax/data'; // Replace with your name
 
 app.use(express.json());
 

@@ -1,3 +1,35 @@
+# PV for the containers
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: host-pv
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+  gcePersistentDisk:
+    pdName: implementation-disk
+    fsType: ext4
+---
+# PVC for the containers
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: host-pvc
+spec:
+  volumeName: host-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi  # Adjust based on your storage requirements
+  storageClassName: standard
+  selector:
+    matchLabels:
+      name: host-pv
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,7 +46,8 @@ spec:
     spec:
       containers:
       - name: container1
-        image: us-central1-docker.pkg.dev/kubernetes-428712/implementation-repository/container1:latest
+        image: us-central1-docker.pkg.dev/kubernetes-428712/implementation-repository/container1:v1.13
+        imagePullPolicy: Always
         ports:
         - containerPort: 3000
         volumeMounts:
@@ -23,7 +56,7 @@ spec:
       volumes:
       - name: persistent-storage
         persistentVolumeClaim:
-          claimName: my-pvc
+          claimName: host-pvc
 ---
 apiVersion: v1
 kind: Service
@@ -32,7 +65,10 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: 80
+    - protocol: TCP  
+      port: 3000
       targetPort: 3000
   selector:
     app: container1
+
+
