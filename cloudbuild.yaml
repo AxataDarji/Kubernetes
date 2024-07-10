@@ -21,7 +21,7 @@ steps:
 
   # Deploy Container1 to GKE
   - name: 'gcr.io/cloud-builders/kubectl'
-    args: [ 'apply', '-f', 'deployment1.yaml' ]  # Deploy the image of contaner1 to GKE Cluster
+    args: [ 'apply', '-f', 'deployment1.yaml' ]  # Deploy the image of contaner1 to GKE 
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
       - 'CLOUDSDK_CONTAINER_CLUSTER=k8s-gke-cluster'
@@ -29,7 +29,7 @@ steps:
 
     # Deploy Container2 to GKE
   - name: 'gcr.io/cloud-builders/kubectl'
-    args: [ 'apply', '-f', 'deployment2.yaml' ]  # Deploy the image of container2 to GKE Cluster
+    args: [ 'apply', '-f', 'deployment2.yaml' ]  # Deploy the image of container2 to GKE 
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
       - 'CLOUDSDK_CONTAINER_CLUSTER=k8s-gke-cluster'
